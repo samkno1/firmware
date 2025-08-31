@@ -1,13 +1,26 @@
-SUMMARY = "bitbake-layers recipe"
-DESCRIPTION = "Recipe created by bitbake-layers"
-LICENSE = "MIT"
+SUMMARY = "Compile bootgen tool"
+DESCRIPTION = "For compiling bootgen tool"
+LICENSE = "Apache-2.0"
 
-python do_display_banner() {
-    bb.plain("***********************************************");
-    bb.plain("*                                             *");
-    bb.plain("*  Example recipe created by bitbake-layers   *");
-    bb.plain("*                                             *");
-    bb.plain("***********************************************");
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c979df673927004a489691fc457facff"
+
+S = "${WORKDIR}/git"
+
+DEPENDS += "openssl"
+RDEPENDS:${PN} += "openssl"
+
+SRC_URI = "git://github.com/Xilinx/bootgen.git;protocol=https;tag=${PV}"
+
+EXTRA_OEMAKE += 'CROSS_COMPILER="${CXX}" -C ${S}'
+CXXFLAGS:append = " -std=c++0x"
+
+TARGET_CC_ARCH += "${LDFLAGS}"
+
+do_install() {
+    install -d ${D}${bindir}
+    install -Dm 0755 ${S}/bootgen ${D}${bindir}
 }
 
-addtask display_banner before do_build
+FILES:${PN} = "${bindir}/bootgen"
+
+BBCLASSEXTEND = "native nativesdk"
