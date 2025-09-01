@@ -1,7 +1,7 @@
 # Xiphos yocto image for the RaspberryPi
 
 ## Download and install dependencies
-Instructions for downloading the required packages can be obtained from:
+Instructions for downloading the required packages for poky can be obtained from:
 https://docs.yoctoproject.org/5.0.11/ref-manual/system-requirements.html#required-packages-for-the-build-host
 - i.e., On Fedora
 ```
@@ -47,14 +47,14 @@ $ sudo dnf install bmap-tools
 ```
 - Go to the raspberry pi images directory
 ``` 
-$ cd poky/build/tmp/deploy/images/raspberrypi0
+$ cd poky/build/tmp/deploy/images/raspberrypi5
 ```
 - Ensure the SD Card is not mounted. For example, with an SD card at /dev/sdb
 ```
 $ sudo umount /dev/sdb*
 ```
-- Load images onto the SD card with bmap
+- Load image onto the SD card with bmap
 ```   
-$ sudo bmaptool copy --bmap xiphos-raspberrypi0.rootfs.wic.bmap --no-sig-verify \
-                        --no-verify xiphos-raspberrypi0.rootfs.wic.zst /dev/sdb
+$ sudo bmaptool copy --bmap xiphos-raspberrypi5.rootfs.wic.bmap --no-sig-verify \
+                        --no-verify xiphos-raspberrypi5.rootfs.wic.zst /dev/sdb
 ```
