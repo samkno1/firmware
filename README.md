@@ -1,4 +1,4 @@
-# Xiphos yocto image for the RaspberryPi Zero board
+# Xiphos yocto image for the RaspberryPi
 
 ## Download and install dependencies
 Instructions for downloading the required packages can be obtained from:
@@ -22,16 +22,21 @@ $ git submodule update --init --force --recursive
 ```
 
 ## Setup environment
-From the project directory firmware/:
+From the project directory, firmware/
 ```
 $ cd poky
 $ source oe-init-build-env
+```
+Return to the project directory, firmware/. Add the non-poky layers to bblayers.conf
+```
+$ bitbake-layers add-layer meta-raspberrypi
+$ bitbake-layers add-layer meta-xiphos
 ```
 
 ## Build image
 After setting up the bitbake build environment
 ```
-$ MACHINE=raspberrypi0 bitbake xiphos
+$ MACHINE=raspberrypi5 bitbake xiphos
 ```
 
 ## Prepare the SDCard with the xiphos image
